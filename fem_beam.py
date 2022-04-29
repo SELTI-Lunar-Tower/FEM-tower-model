@@ -46,7 +46,7 @@ def beam(num_elems):
 	return M, K, frequencies, evecs
 
 # beam element
-print 'Beam element'
+print ('Beam element')
 # exact_frequency = math.pi**2   #  simply supported
 # exact_frequency = 1.875104**2  #  cantilever beam
 # exact_frequency = 3.926602**2  #  built in - pinned beam
@@ -54,14 +54,14 @@ exact_frequency = 4.730041**2  #  fixed-fixed
 
 errors = []
 for i in range(2,6):     # number of elements
-	start = time.clock()
+	start = time.perf_counter()
 	M, K, frequencies, evecs = beam(i)
-	time_taken = time.clock() - start
+	time_taken = time.perf_counter() - start
 	error = (frequencies[0] - exact_frequency) / exact_frequency * 100.0
 	errors.append( (i, error) )
-	print 'Num Elems: {} \tFrequency: {}\tError: {}% \tShape: {} \tTime: {}'.format( i, round(frequencies[0],3), round(error, 3), K.shape, round(time_taken*1000, 3) )
+	print ('Num Elems: {} \tFrequency: {}\tError: {}% \tShape: {} \tTime: {}'.format( i, round(frequencies[0],3), round(error, 3), K.shape, round(time_taken*1000, 3) ))
 
-print 'Exact Freq:', round(exact_frequency, 3)
+print ('Exact Freq:', round(exact_frequency, 3))
 
 element  = np.array([x[0] for x in errors])
 error   = np.array([x[1] for x in errors])
